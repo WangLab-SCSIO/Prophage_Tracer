@@ -106,7 +106,7 @@ function calculation1() {
      attL_end=send1
      attR_start=sstart2
      attR_end=sstart2+qend1-qstart2
-     prophage_size=attR_end-attL_start
+     prophage_size=attR_end-attL_end
      print SR_type,SR_DRP_type,evidence,attL_start,attL_end,attR_start,attR_end,prophage_size,$0
 }
 
@@ -115,7 +115,7 @@ function calculation2() {
      attL_end=send2
      attR_start=sstart1
      attR_end=sstart1+qend2-qstart1
-     prophage_size=attR_end-attL_start
+     prophage_size=attR_end-attL_end
 	 print SR_type,SR_DRP_type,evidence,attL_start,attL_end,attR_start,attR_end,prophage_size,$0
 }
 
@@ -126,7 +126,7 @@ function calculation3() {
      attL_end=sstart2+qend1-qstart2
      attR_start=send1-qend1+qstart2
      attR_end=send1
-     prophage_size=attR_end-attL_start
+     prophage_size=attR_end-attL_end
 	 print SR_type,SR_DRP_type,evidence,attL_start,attL_end,attR_start,attR_end,prophage_size,$0
 }
 
@@ -136,7 +136,7 @@ function calculation4() {
      attL_end=sstart1+qend2-qstart1
      attR_start=send2-qend2+qstart1
      attR_end=send2
-     prophage_size=attR_end-attL_start
+     prophage_size=attR_end-attL_end
 	 print SR_type,SR_DRP_type,evidence,attL_start,attL_end,attR_start,attR_end,prophage_size,$0
 }
 
