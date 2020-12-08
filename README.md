@@ -3,8 +3,8 @@ Prophage GPS
 
 Prophage GPS: Precisely tracing prophages in prokaryotic genomes using overlapping split-read alignment
 
-# Requirement
-========
+Requirement
+======
 
 #### System and software requirements
 
@@ -14,7 +14,8 @@ Prophage GPS: Precisely tracing prophages in prokaryotic genomes using overlappi
 4. [sambamba](http://lomereiter.github.io/sambamba/)
 5. [samtools](http://www.htslib.org/)
 
-#### Installation
+Installation
+======
 
 Install through Conda
 ```Bash
@@ -24,12 +25,13 @@ conda uninstall -c bioconda samtools
 
 # Run Prophage GPS
 
-*Download the `prophage_GPS.sh` and put it in your working path
-*Prepare aligned reads in SAM file
+* Download the `prophage_GPS.sh` and put it in your working path
+* Prepare aligned reads in SAM file
+```Bash
 bwa index reference_genome_strain1.fasta -p strain1
 
 bwa mem strain1 1.fastq.gz 2.fastq.gz >strain1.sam
 
 samtools view -S -b $sam_file -o $prefix.bam
 sambamba markdup -r $prefix.bam $prefix.rmdup.bam
-samtools view $prefix.rmdup.bam -o $prefix.rmdup.sam 
+samtools view $prefix.rmdup.bam -o $prefix.rmdup.sam
