@@ -1,5 +1,3 @@
-# Prophage_GPS
-
 Prophage GPS
 ========
 
@@ -11,10 +9,10 @@ Prophage GPS: Precisely tracing prophages in prokaryotic genomes using overlappi
 #### System and software requirements
 
 1. Linux (Tested in CentOS 6.8 and 7.0)
-2. [BLAST +] (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.10.1/)
-3. [BWA] (http://bio-bwa.sourceforge.net/)
-4. [sambamba] (http://lomereiter.github.io/sambamba/)
-5. [samtools] (http://www.htslib.org/)
+2. [BLAST +](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.10.1/)
+3. [BWA](http://bio-bwa.sourceforge.net/)
+4. [sambamba](http://lomereiter.github.io/sambamba/)
+5. [samtools](http://www.htslib.org/)
 
 #### Installation
 
