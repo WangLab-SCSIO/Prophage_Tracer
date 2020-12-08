@@ -9,7 +9,7 @@ set -eo pipefail
 ## usage
 usage() {
     echo "
-Prophage GPS V1.0.0 11/7/2020
+Prophage GPS V1.0.0 12/8/2020
 usage:   prophage_GPS [options] -m <in.sam> -r <in.fasta> -p <prefix>
 requirement：locally installed BLAST+ software
 
@@ -17,7 +17,7 @@ options:
      -m  FILE    a full SAM file (required)
      -r  FILE    a reference genome sequence (required)
      -p  STRING  prefix of output files (required; usually a strain name or a sample name)
-     -x  INT     maximal siza of prophage (default: 150000)
+     -x  INT     maximal size of prophage (default: 150000)
      -n  INT     minimal size of prophage (default: 5000)
      -a  INT     minimal length of attchment site (default: 10)
      -t  INT     number of threads used for BlastN (default: 1)
