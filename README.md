@@ -59,6 +59,6 @@ options:
      -n  INT     minimal size of prophage (default: 5000)
      -a  INT     minimal length of attchment site (default: 10)
      -t  INT     number of threads used for BlastN (default: 1)
-	 -s  INT     minimal event of split reads required for supporting a prophage candidate
-	 -d  INT     minimal event of discordant read pairs required for supporting a prophage candidat
+     -s  INT     minimal event of split reads required for supporting a prophage candidate
+     -d  INT     minimal event of discordant read pairs required for supporting a prophage candidat
 ```
