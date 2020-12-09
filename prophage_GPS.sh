@@ -757,6 +757,8 @@ blastn -query $prefix.SR.reads.fasta -db $prefix.nuclDB -out $prefix.SR.blastn.r
 
 #Clean up
 
+rm $prefix.sr.temp.1 $prefix.sr.temp.2 $prefix.sr.temp.3 $prefix.drp.temp.out $prefix.SR_evidence.list2 $prefix.SR_evidence.list1 $prefix.temp.out $prefix.SR.reads.fasta $prefix.reads.fasta $prefix.nuclDB.*  blastn.log makeblastdb.log $prefix.sr.temp.out $prefix.blastn.result
+
 
 if [ $? -eq 0 ]
 then
