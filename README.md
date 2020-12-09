@@ -19,9 +19,9 @@ Installation
 
 Install through Conda
 ```Bash
-conda uninstall -c bioconda bwa
-conda uninstall -c bioconda sambamba
-conda uninstall -c bioconda samtools
+conda install -c bioconda bwa
+conda install -c bioconda sambamba
+conda install -c bioconda samtools
 ```
 Run Prophage GPS
 ------
