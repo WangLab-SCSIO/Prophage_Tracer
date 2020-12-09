@@ -67,7 +67,7 @@ Using generate_DNA.sh for generating simulated genomes resulting from prophage e
 
 Install `seqkit` first
 ```Bash
-conda uninstall -c bioconda seqkit
+conda install -c bioconda seqkit
 ```
 Run script (default: 20 genomes containing one prophage each)
 ```Bash
