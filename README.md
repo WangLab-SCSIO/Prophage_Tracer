@@ -62,7 +62,8 @@ options:
      -s  INT     minimal event of split reads required for supporting a prophage candidate
      -d  INT     minimal event of discordant read pairs required for supporting a prophage candidat
 ```
-#### Using generate_DNA.sh for generating simulated genomes resulting from prophage excision
+Using generate_DNA.sh for generating simulated genomes resulting from prophage excision
+------
 
 Install `seqkit` first
 ```Bash
