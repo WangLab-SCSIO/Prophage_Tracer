@@ -44,7 +44,7 @@ samtools view strain1.rmdup.bam -o strain1.rmdup.sam
 ```
 #### Run prophage_GPS.sh
 ```Bash
-bash prophage.sh -m strain1.rmdup.sam -r reference_genome_strain1.fasta -p strain1
+bash prophage_GPS.sh -m strain1.rmdup.sam -r reference_genome_strain1.fasta -p strain1
 ```
 #### Usage
 
