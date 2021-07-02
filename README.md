@@ -1,4 +1,4 @@
-Prophage tracer
+Prophage Tracer
 ========
 
 Prophage tracer: Precisely tracing prophages in prokaryotic genomes using overlapping split-read alignment
