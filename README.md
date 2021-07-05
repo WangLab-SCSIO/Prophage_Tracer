@@ -8,7 +8,7 @@ Requirement
 
 #### System and software requirements
 
-1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2)). If you have gerenated an SAM file using samtools, our script can be equally used to preidict propahges on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
+1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2))
 2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
 3. bwa 0.6 (http://bio-bwa.sourceforge.net/)
 4. sambamba 0.8.0 (http://lomereiter.github.io/sambamba/)
@@ -96,6 +96,7 @@ is seperated in to two or more contigs and consist at least 5' end of contig0000
 #### Notes
 1. `prophage_tracer.sh` is used for chromosome-level genomes. `prophage_tracer_WGS.sh` can be used for chromosome-level and contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  genomes would be slow.
 2. If a prophage is seperated into two or more contigs, the predicted prophage size might be smaller than the true size.
+3. If you have gerenated an SAM file using samtools, our script can be equally used to predict propahges on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
 
 Using `generate_DNA.sh` for generating simulated genomes resulted from prophage excision
 ------
