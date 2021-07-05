@@ -9,7 +9,7 @@ Requirement
 #### System and software requirements
 
 1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2)). If you have gerenated an SAM file using samtools, our script can be equally used on Windows 10 with Git Bash 2.32.0 and blastn: 2.6.0+ installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
-2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Dwonliad the appropriate version for your system.
+2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Dwonload the appropriate version for your system.
 3. bwa 0.6 (http://bio-bwa.sourceforge.net/)
 4. sambamba 0.8.0 (http://lomereiter.github.io/sambamba/)
 5. samtools 1.10 (http://www.htslib.org/)
