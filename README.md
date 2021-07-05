@@ -8,26 +8,25 @@ Requirement
 
 #### System and software requirements
 
-1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2)). If you have gerenated an SAM file using samtools, our script can be equally used on Windows 10 with Git Bash 2.32.0 and blastn: 2.6.0+ installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
-2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Dwonload the appropriate version for your system.
+1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2)). If you have gerenated an SAM file using samtools, our script can be equally used to preidict propahges on Windows 10 with Git Bash and blastn (ncbi-blast-2.6.0+-win64.exe) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
+2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
 3. bwa 0.6 (http://bio-bwa.sourceforge.net/)
 4. sambamba 0.8.0 (http://lomereiter.github.io/sambamba/)
 5. samtools 1.10 (http://www.htslib.org/)
 
 #### Other softwares may be useful for data pre-processing steps
-1. Shovill 1.1.0 (https://github.com/tseemann/shovill) for assembling genomes. It is useful for detect prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs usually but not necessary is significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
-2. Trimmomatic 0.39 (https://github.com/usadellab/Trimmomatic) for remove low-quality regions and adapters in reads.
+1. Shovill 1.1.0 (https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessaryly significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
+2. Trimmomatic 0.39 (https://github.com/usadellab/Trimmomatic) for removeing low-quality regions and adapters in reads.
 
 Installation
 ------
-1. Just download the shell scripts prophage_tracer.sh and prophage_tracer.sh to your working directory of recommended linux
+1. Just download the shell scripts prophage_tracer.sh and prophage_tracer.sh to your working directory
 2. Install required softwares through Conda
 
 #### first install conda
 ```Bash
 wget -c https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 bash Miniconda2-latest-Linux-x86_64.sh
-using Enter or typing "yes", chose "no" when changning envionment variables
 ```
 #### Chaing your envionment variables temporarily to use conda
 ```Bash
@@ -46,7 +45,7 @@ Run Prophage Tracer
 * Download the `prophage_tracer.sh` and put it in your working path
 * Prepare aligned reads in SAM file
 
-Assume that you have a sequenced bacterium (strain1) genome in FASTA foramt `reference_genome_strain1.fasta`, paried reads in FASTQ foramt `1.fastq.gz` and `2.fastq.gz`
+Assume that you have a sequenced bacterium (strain1) genome in FASTA foramt `reference_genome_strain1.fasta`, and paried reads in FASTQ foramt `1.fastq.gz` and `2.fastq.gz`
 
 #### Align reads to the reference genome
 ```Bash
@@ -81,29 +80,31 @@ options:
 ```
 
 #### Typical output
-prophage_candidate|contig|attL_start|attL_start|attR_end|attR_end|prophage_size|SR_evidence_attB|SR_evidence_attP|DRP_evidence_attB|DRP_evidence_attP|
+prophage_candidate|contig|attL_start|attL_end|attR_start|attR_end|prophage_size|SR_evidence_attB|SR_evidence_attP|DRP_evidence_attB|DRP_evidence_attP|
 |----------|-------------------------|----|----|----|----|----|----|----|----|----|
 candidate_1|contig00007=::=contig00014|209162|209236|2365|2439|16770|0|4|1|2
 candidate_2|contig00001|1064123|1064145|1100156|1100178|36033|0|1|0|0
 candidate_3|=contig00003::=contig00004|1700|1764|46895|46959|48658|2|28|2|24
 
-#### Explaination
-Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with attL (1064123-1064145) and attR (1100156-1100178). Prophage Phm1 (candidate_1) is seperated in to two or more contigs and consist at least 3'end of contig00007 (att site: 209162-209236 on contig00007) and 5' end of contig00014 (att site: 2365-2439 on contig00014). Predicted prophage size is smaller than true size. Similaryly, Prophage Phm3 (candidate_3)
-is seperated in to two or more contigs and consist at least 5'end of contig00003 (att site: 1700-1764 on contig00003) and 5' end of contig00014 (att site: 46895-46959 on contig00014).
+#### Explanation
+"::" indicates prophage is seperated into two or more contigs. "=" indicates the 5' end or 3' end of a contig contains a part of a prophage.  "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
+Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is seperated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014).  Similarly, Prophage Phm3 (candidate_3)
+is seperated in to two or more contigs and consist at least 5' end of contig00003 (*att* site: 1700-1764 on contig00003) and 5' end of contig00014 (*att* site: 46895-46959 on contig00014).
 
 
 
 #### Notes
-prophage_tracer.sh is used for chromosome-level level genoems. prophage_tracer_WGS.sh is usually used for contig-level level genoems. Although prophage_tracer_WGS.sh is suitbale for analysis of chromosome-level level genoems, it will be slow. We recommend using prophage_tracer.sh for analysis of chromosome-level level genoems to reduce running time. 
+1. prophage_tracer.sh is used for chromosome-level genomes. prophage_tracer_WGS.sh can be used for chromosome-level or contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  will be slow.
+2. If a prophage is seperated into two or more contigs, the predicted prophage size is smaller than true size.
 
-Using generate_DNA.sh for generating simulated genomes resulting from prophage excision
+Using generate_DNA.sh for generating simulated genomes resulted from prophage excision
 ------
 
 Install `seqkit` first
 ```Bash
 conda install -c bioconda seqkit
 ```
-Run script (default: 20 genomes containing one prophage each)
+Run script (default: simulating 20 genomes and one prophage in each genome)
 ```Bash
 bash generate_DNA.sh
 ```

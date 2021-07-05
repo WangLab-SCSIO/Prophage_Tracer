@@ -1203,7 +1203,7 @@ then
  
 fi
 
-awk ' BEGIN {FS="\t";OFS="\t";i=1;print "prophage_candidate","contig","attL_start","attL_start","attR_end","attR_end","prophage_size","SR_evidence_attB","SR_evidence_attP","DRP_evidence_attB","DRP_evidence_attP"}
+awk ' BEGIN {FS="\t";OFS="\t";i=1;print "prophage_candidate","contig","attL_start","attL_end","attR_start","attR_end","prophage_size","SR_evidence_attB","SR_evidence_attP","DRP_evidence_attB","DRP_evidence_attP"}
 
 
 {		
