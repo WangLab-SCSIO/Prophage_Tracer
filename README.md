@@ -34,7 +34,6 @@ export PATH=~/miniconda2/bin:$PATH
 ```
 ```Bash
 conda install -c bioconda bwa
-conda install -c bioconda bwa
 conda install -c bioconda sambamba
 conda install -c bioconda samtools
 ```
@@ -87,15 +86,15 @@ candidate_2|contig00001|1064123|1064145|1100156|1100178|36033|0|1|0|0
 candidate_3|=contig00003::=contig00004|1700|1764|46895|46959|48658|2|28|2|24
 
 #### Explanation
-"::" indicates prophage is seperated into two or more contigs. "=" indicates the 5' end or 3' end of a contig contains a part of a prophage.  "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
+#####"::" indicates prophage is seperated into two or more contigs. "=" indicates the 5' end or 3' end of a contig contains a part of a prophage.  "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
 Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is seperated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014).  Similarly, Prophage Phm3 (candidate_3)
 is seperated in to two or more contigs and consist at least 5' end of contig00003 (*att* site: 1700-1764 on contig00003) and 5' end of contig00014 (*att* site: 46895-46959 on contig00014).
 
 
 
 #### Notes
-1. prophage_tracer.sh is used for chromosome-level genomes. prophage_tracer_WGS.sh can be used for chromosome-level or contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  will be slow.
-2. If a prophage is seperated into two or more contigs, the predicted prophage size is smaller than true size.
+1. prophage_tracer.sh is used for chromosome-level genomes. prophage_tracer_WGS.sh can be used for chromosome-level and contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  genomes would be slow.
+2. If a prophage is seperated into two or more contigs, the predicted prophage size might be smaller than the true size.
 
 Using generate_DNA.sh for generating simulated genomes resulted from prophage excision
 ------
@@ -108,3 +107,9 @@ Run script (default: simulating 20 genomes and one prophage in each genome)
 ```Bash
 bash generate_DNA.sh
 ```
+Copyright
+------
+Kaihao Tang, khtang@scsio.ac.cn 
+Xiaoxue Wang, xxwang@scsio.ac.cn
+Marine Biofilm Lab
+SCSIO, Chinese Academy of Sciences
