@@ -3,14 +3,14 @@
 set -eo pipefail
 
 ##########################################################
-# Prophage GPS V1.0.0
+# Prophage Tracer V1.0.0
 #########################################################
 
 ## usage
 usage() {
     echo "
-Prophage GPS V1.0.0 12/8/2020
-usage:   prophage_GPS [options] -m <in.sam> -r <in.fasta> -p <prefix>
+Prophage Tracer V1.0.0 07/05/2021
+usage:   bash prophage_tracer-WGS.sh [options] -m <in.sam> -r <in.fasta> -p <prefix>
 requirement：locally installed BLAST+ software
 
 options:
@@ -722,21 +722,6 @@ else
 fi
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #Classify reads containing attB or attP in WGS (only contigs)
 
 awk '
@@ -843,7 +828,7 @@ function calculation10() {
 	 print SR_type,contig"::"$2,evidence,attL_start,attL_end,attR_start,attR_end,prophage_size,$1,CONTIGPOSITION
 }
 
-###########统计contig长度
+###########contig length
 FILENAME==ARGV[1] {CONTIGLEN[$1]=$2}
 
 FILENAME==ARGV[2] {
@@ -1016,7 +1001,7 @@ END{
 
 '  $prefix.WGS.sr.temp.4 | awk '!a[$0]++' > $prefix.WGS.sr.temp.out
 
-#Step 2: Extracting discordant read pairs#筛选出成对的
+#Step 2: Extracting discordant read pairs
 
 awk --re-interval '$1 ~ /^@/ || ($2 ~ /97|145|81|161|177|113|129|65/ && ($6 ~ /^[1][0-5][0-9]M/ || $6 ~ /^[6-9][0-9]M/) )' $sam_file | awk '!a[$2"_"$3"_"$4"_"$5"_"$6"_"$7"_"$8]++' | sort -k1,1 -k2n,2 | awk '
 

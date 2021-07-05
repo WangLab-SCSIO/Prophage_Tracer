@@ -3,14 +3,14 @@
 set -eo pipefail
 
 ##########################################################
-# Prophage GPS V1.0.0
+# Prophage Tracer V1.0.0
 #########################################################
 
 ## usage
 usage() {
     echo "
-Prophage GPS V1.0.0 12/8/2020
-usage:   prophage_GPS [options] -m <in.sam> -r <in.fasta> -p <prefix>
+Prophage Tracer V1.0.1 07/05/2021
+usage:   bash prophage_tracer.sh [options] -m <in.sam> -r <in.fasta> -p <prefix>
 requirement：locally installed BLAST+ software
 
 options:
@@ -71,7 +71,7 @@ then
 	exit 1
 fi
 
-###########统计contig的长度
+###########contig length
 cat $fasta | awk '$0 ~ ">" {print c; c=0;split($0,a,"[> ]"); printf a[2] "\t"; } $0 !~ ">" {c+=length($0);} END { print c; }' > contiglength.file
 
 
@@ -723,7 +723,7 @@ fi
 
 
 
-#Step 2: Extracting discordant read pairs#筛选出成对的
+#Step 2: Extracting discordant read pairs
 
 
 # Step 3: Combining split reads and discordant read pairs
@@ -748,8 +748,15 @@ fi
 
 
 
-
 #Delet existed SR_evidence.list
+
+if [ -f "$prefix.SR_evidence.list1" ]
+then
+ 
+ rm $prefix.SR_evidence.list1
+ 
+fi
+
 
 awk ' BEGIN {FS="\t";OFS="\t";i=1;print "prophage_candidate","contig","attL_start","attL_start","attR_end","attR_end","prophage_size","SR_evidence_attB","SR_evidence_attP","DRP_evidence_attB","DRP_evidence_attP"}
 
