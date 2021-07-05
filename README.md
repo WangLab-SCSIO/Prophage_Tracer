@@ -79,7 +79,7 @@ options:
 ```
 
 #### Typical output
-##### Find strain1,prophage.out
+Find result in `strain1,prophage.out`
 prophage_candidate|contig|attL_start|attL_end|attR_start|attR_end|prophage_size|SR_evidence_attB|SR_evidence_attP|DRP_evidence_attB|DRP_evidence_attP|
 |----------|-------------------------|----|----|----|----|----|----|----|----|----|
 candidate_1|contig00007=::=contig00014|209162|209236|2365|2439|16770|0|4|1|2
