@@ -1,7 +1,7 @@
 #!/bin/bash
 echo "Generating DNA" | awk '
 
-BEGIN {FS="\t";OFS="\t";srand()} 
+BEGIN {FS="\t";OFS="\t";srand();print "genome_name","Att_site_length","Prophage_lenght","attL_start","attL_end","attR_start","attR_end","Genome_size","GC_content" >> "genome_position.tsv"} 
 
 ##############################Function_start
 function randint(n) {
@@ -24,16 +24,18 @@ function mutation2(Att2) {
 	 return Att2
 }
 
-function mutation(Att)
-{
+function mutation(Att){
     mismatch=int(rand()*100%2+1)
+	print "mismatch",mismatch
 
     if ( mismatch == 1 )
 	{    
         len=length(Att)
         pos1=randint(len)
-        while(pos1 == 1 || pos1 == len)     
-        {pos1=randint(len)}
+        do
+		{
+		    pos1=randint(len)
+		}while(pos1 == 1 || pos1 == len)  
         return mutation1(Att)
     } 
 	else if ( mismatch == 2 )
@@ -41,10 +43,11 @@ function mutation(Att)
         len=length(Att)
         pos1=randint(len)
         pos2=randint(len)
-        while(pos1 == 1 || pos1 == len || pos2 == 1 || pos2 == len || pos1 == pos2)
+		do
         {   pos1=randint(len)
             pos2=randint(len)
-        }
+        }while(pos1 == 1 || pos1 == len || pos2 == 1 || pos2 == len || pos1 == pos2)
+
         return mutation2(Att)
     }
 }
@@ -53,37 +56,38 @@ function mutation(Att)
 ##############################Function_end
 
 
-function generate_dna(LEN) {
-     dna=""
-	 do
-	 {	 
-	     for( i = 1; i <= LEN; i++) 
-         {
-            dna=dna substr("ATCG", randint(4), 1)
-         }
-		 dna_check=dna
-		 gsub(/[^GC]/,"",dna)
-	 }
-     while(length(dna)/length(dna_check) < 0.4 || length(dna)/length(dna_check) > 0.7 )
-	 return dna_check
-}
-
-
 {
 
 	
-	for (count = 1; count <= 20; count++)
-	{    
-	    Genome_left_len=randrang(5000,3995000)
-	    Genome_rigth_len=4000000-Genome_left_len
-	    Att_site_len=randrang(10,100)
+for (count = 1; count <= 20; count++)
+    {
+        do
+		{
+		    GC_CONTENT=int(rand()*100)/100
+	    }while(GC_CONTENT <= 0.20 ||GC_CONTENT >= 0.80)
+
+		GENOME_SIZE=4000000
+		    
+		
+		Genome_left_len=randrang(1000000,3000000)
+	    Genome_rigth_len=GENOME_SIZE-Genome_left_len
+	    Att_site_len=randrang(2,145)
 	    Prophage_len=randrang(5000,150000)
 
-	    Genome_left=generate_dna(Genome_left_len)
-	    Genome_rigth=generate_dna(Genome_rigth_len)
-	    Att_site_L=generate_dna(Att_site_len)
-		Att_site_R=mutation(Att_site_L)
-	    Prophage=generate_dna(Prophage_len)
+	    "python3 -c \047import random_DNA; print(random_DNA2.biased_DNA_generator("GC_CONTENT","Genome_left_len"))\047"|getline Genome_left
+	    "python3 -c \047import random_DNA; print(random_DNA2.biased_DNA_generator("GC_CONTENT","Genome_rigth_len"))\047"|getline Genome_rigth
+	    "python3 -c \047import random_DNA; print(random_DNA2.biased_DNA_generator("GC_CONTENT","Att_site_len"))\047"|getline Att_site_L
+        
+		if (length(Att_site_L) <=4)
+		{
+		    Att_site_R=Att_site_L
+		}
+		else
+		{
+		    Att_site_R=mutation(Att_site_L)
+		}	
+
+	    "python3 -c \047import random_DNA; print(random_DNA2.biased_DNA_generator("GC_CONTENT","Prophage_len"))\047"|getline Prophage
 		
 		Prophage_c=substr(Prophage,int(Prophage/2))substr(Att_site_R,1,int(Att_site_len/2))substr(Att_site_L,int(Att_site_len/2)+1)substr(Prophage,1,int(Prophage/2)-1)
 		
@@ -117,8 +121,7 @@ function generate_dna(LEN) {
 #################################################################
 #reporting positions
 #################################################################
-		print "sg_"count,Att_site_len,Prophage_len,Genome_left_len+1,Genome_left_len+Att_site_len,Genome_left_len+Att_site_len+Prophage_len+1,Genome_left_len+Att_site_len+Prophage_len+Att_site_len >> "genome_position.tsv"
-
+		print "sg_"count,Att_site_len,Prophage_len,Genome_left_len+1,Genome_left_len+Att_site_len,Genome_left_len+Att_site_len+Prophage_len+1,Genome_left_len+Att_site_len+Prophage_len+Att_site_len, Genome_left_len+Att_site_len+Prophage_len+Att_site_len+Genome_rigth_len,GC_CONTENT >> "genome_position.tsv"
 	}
 }'
 
@@ -131,16 +134,17 @@ seqkit split genomes_attB.fasta -i -O attB
 cat prophage_c.fasta |seqkit replace -p "sg_" -r 'attP_sg_' > prophage_circle.fasta
 seqkit split prophage_circle.fasta -i -O attP
 
+
+
+### Generating abundance file for metegenomic mode of GemSIM
 for ((j=1; j<= 20; j++))
 do
     mkdir sg_$j
     cp ./genomes/genomes.id_genome_sg_${j}.fasta ./attB/genomes_attB.id_attB_sg_${j}.fasta ./attP/prophage_circle.id_attP_sg_${j}.fasta ./sg_${j}/
-	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"998}NR==2{print $0"\t"1}NR==3{print $0"\t"1}' > sg_${j}_abundance1.txt
-	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"989}NR==2{print $0"\t"1}NR==3{print $0"\t"10}' > sg_${j}_abundance2.txt
-	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"980}NR==2{print $0"\t"10}NR==3{print $0"\t"10}' > sg_${j}_abundance3.txt
-	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"990}NR==2{print $0"\t"10}NR==3{print $0"\t"990}' > sg_${j}_abundance4.txt
+	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"1}NR==2{print $0"\t"998}NR==3{print $0"\t"1}' > sg_${j}_abundance1.txt
+	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"1}NR==2{print $0"\t"989}NR==3{print $0"\t"10}' > sg_${j}_abundance2.txt
+	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"10}NR==2{print $0"\t"980}NR==3{print $0"\t"10}' > sg_${j}_abundance3.txt
+	ls ./sg_${j}/| awk '{FS="\t";OFS="\t"} NR==1{print $0"\t"10}NR==2{print $0"\t"990}NR==3{print $0"\t"990}' > sg_${j}_abundance4.txt
 
 done
-
-echo "Found each group of genomes in each folder containing original bacterial genome, bacterial genome with prophage excised and circular prophage genome"
 

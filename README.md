@@ -8,15 +8,15 @@ Requirement
 
 #### System and software requirements
 
-1. Linux (Tested in CentOS 6.8 and 7.0; Ubuntu), we mainly use CentOS Linux release 7.8.2003(GNU Awk 4.0.2). 
-2. [blastn: 2.6.0+](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/)
-3. [bwa 0.6](http://bio-bwa.sourceforge.net/)
-4. [sambamba 0.8.0](http://lomereiter.github.io/sambamba/)
-5. [samtools 1.10](http://www.htslib.org/)
+1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2))
+2. blastn: 2.6.0+ https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/
+3. bwa 0.6 http://bio-bwa.sourceforge.net/
+4. sambamba 0.8.0 http://lomereiter.github.io/sambamba/
+5. samtools 1.10 http://www.htslib.org/
 
 ## Other softwares may be useful for data pre-processing steps
-1. [Shovill 1.1.0](https://github.com/tseemann/shovill) for assembling genomes. It is useful for detect prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs usually but not necessary have significantly higher depth than other contigs. The depth is written into the name of each contig in the output of Shovill.
-2.[Trimmomatic 0.39](https://github.com/usadellab/Trimmomatic) for remove low-quality regions and adapters in reads.
+1. Shovill 1.1.0(https://github.com/tseemann/shovill) for assembling genomes. It is useful for detect prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs usually but not necessary have significantly higher depth than other contigs. The depth is written into the name of each contig in the output of Shovill.
+2. Trimmomatic 0.39(https://github.com/usadellab/Trimmomatic) for remove low-quality regions and adapters in reads.
 
 Installation
 ------
@@ -39,7 +39,7 @@ conda install -c bioconda sambamba
 conda install -c bioconda samtools
 ```
 ## For Windows
-If have get SAM file, our script can be equally used on Windows 10 with Git Bash (GNU bash, version 4.4.23(1)-release (x86_64-pc-msys) with GNU Awk 5.0.0, API: 2.0 (GNU MPFR 4.1.0, GNU MP 6.2.0)) and blastn: 2.6.0+ installed . For installing Git Bash, please refer to https://git-scm.com/downloads.
+If you have gerenated an SAM file using samtools, our script can be equally used on Windows 10 with Git Bash (GNU bash, version 4.4.23(1)-release (x86_64-pc-msys) with GNU Awk 5.0.0, API: 2.0 (GNU MPFR 4.1.0, GNU MP 6.2.0)) and blastn: 2.6.0+ installed . For installing Git Bash, please refer to https://git-scm.com/downloads.
 
 Run Prophage Tracer
 ------
