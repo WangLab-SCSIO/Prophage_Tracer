@@ -9,14 +9,14 @@ Requirement
 #### System and software requirements
 
 1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2))
-2. [blastn: 2.6.0+] (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
+2. [blastn: 2.6.0+](https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
 3. [bwa 0.6] (http://bio-bwa.sourceforge.net/)
-4. [sambamba 0.8.0] (http://lomereiter.github.io/sambamba/)
-5. [samtools 1.10] (http://www.htslib.org/)
+4. [sambamba 0.8.0](http://lomereiter.github.io/sambamba/)
+5. [samtools 1.10](http://www.htslib.org/)
 
 #### Other softwares may be useful for data pre-processing steps
-1. Shovill 1.1.0 (https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessarily significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
-2. Trimmomatic 0.39 (https://github.com/usadellab/Trimmomatic) for removeing low-quality regions and adapters in reads.
+1. [Shovill 1.1.0](https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessarily significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
+2. [Trimmomatic 0.39](https://github.com/usadellab/Trimmomatic) for removeing low-quality regions and adapters in reads.
 
 Installation
 ------
@@ -105,7 +105,7 @@ Install `seqkit` first
 ```Bash
 conda install -c bioconda seqkit
 ```
-Download `generate_DNA.sh` and `random_DNA.py`
+Download ``generate_DNA.sh`` and ``random_DNA.py``
 
 Run script (default: simulating 20 genomes and one prophage in each genome)
 ```Bash
