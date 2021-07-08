@@ -44,7 +44,7 @@ Run Prophage Tracer
 
 #### 2. Prepare aligned reads in SAM file
 
-Assume that you have a sequenced bacterium (strain1) genome in FASTA foramt `reference_genome_strain1.fasta`, and paried reads in FASTQ foramt `1.fastq.gz` and `2.fastq.gz`
+Assume that you have a sequenced bacterium (strain1) genome in FASTA foramt `reference_genome_strain1.fasta`, and paried reads in FASTQ format `1.fastq.gz` and `2.fastq.gz`
 
 * Align reads to the reference genome
 ```Bash
