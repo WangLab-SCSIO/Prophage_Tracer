@@ -9,13 +9,13 @@ Requirement
 #### System and software requirements
 
 1. Linux (Tested in CentOS 6.8 and CentOS Linux release 7.8.2003 (GNU Awk 4.0.2))
-2. blastn: 2.6.0+ (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
-3. bwa 0.6 (http://bio-bwa.sourceforge.net/)
-4. sambamba 0.8.0 (http://lomereiter.github.io/sambamba/)
-5. samtools 1.10 (http://www.htslib.org/)
+2. [blastn: 2.6.0+] (https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/), Download ncbi-blast-2.6.0+-x64-linux.tar.gz for linux system.
+3. [bwa 0.6] (http://bio-bwa.sourceforge.net/)
+4. [sambamba 0.8.0] (http://lomereiter.github.io/sambamba/)
+5. [samtools 1.10] (http://www.htslib.org/)
 
 #### Other softwares may be useful for data pre-processing steps
-1. Shovill 1.1.0 (https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessaryly significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
+1. Shovill 1.1.0 (https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessarily significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
 2. Trimmomatic 0.39 (https://github.com/usadellab/Trimmomatic) for removeing low-quality regions and adapters in reads.
 
 Installation
@@ -72,14 +72,14 @@ options:
      -p  STRING  prefix of output files (required; usually a strain name or a sample name)
      -x  INT     maximal size of a prophage (default: 150000)
      -n  INT     minimal size of a prophage (default: 5000)
-     -a  INT     minimal length of attchment site (default: 3)
+     -a  INT     minimal length of attchment site (default: > 2)
      -t  INT     number of threads used for BlastN (default: 1)
      -s  INT     minimal event of split reads required for supporting a prophage candidate (default: 1)
      -d  INT     minimal event of discordant read pairs required for supporting a prophage candidat (default: 1)
 ```
 
 #### Typical output
-Find result in `strain1,prophage.out`
+Find result in `strain1.prophage.out`
 prophage_candidate|contig|attL_start|attL_end|attR_start|attR_end|prophage_size|SR_evidence_attB|SR_evidence_attP|DRP_evidence_attB|DRP_evidence_attP|
 |----------|-------------------------|----|----|----|----|----|----|----|----|----|
 candidate_1|contig00007=::=contig00014|209162|209236|2365|2439|16770|0|4|1|2
@@ -87,16 +87,16 @@ candidate_2|contig00001|1064123|1064145|1100156|1100178|36033|0|1|0|0
 candidate_3|=contig00003::=contig00004|1700|1764|46895|46959|48658|2|28|2|24
 
 #### Explanation
-#####"::" indicates prophage is seperated into two or more contigs. "=" indicates the 5' end or 3' end of a contig contains a part of a prophage.  "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
-Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is seperated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014).  Similarly, Prophage Phm3 (candidate_3)
-is seperated in to two or more contigs and consist at least 5' end of contig00003 (*att* site: 1700-1764 on contig00003) and 5' end of contig00014 (*att* site: 46895-46959 on contig00014).
-
-
+1. If a single contig was given in the `contig` column, it means an intact predicted prophage is in this contig.
+2. "::" indicates a predicted prophage is seperated into two or more contigs. "=" indicates that the 5' end or 3' end of a contig contains a part of a prophage. "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
+3. "SR_evidence_attB/attP" indicate split read counts support *attB* or *attP* of the predicted prophage. "DRP_evidence_attB/attP" indicate discordant read pair counts support *attB* or *attP* of the predicted prophage.
+4. Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is seperated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014). Prophage Phm3 (candidate_3)
+is seperated into two or more contigs and consist at least 5' end of contig00003 (*att* site: 1700-1764 on contig00003) and 5' end of contig00014 (*att* site: 46895-46959 on contig00014).
 
 #### Notes
 1. `prophage_tracer.sh` is used for chromosome-level genomes. `prophage_tracer_WGS.sh` can be used for chromosome-level and contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  genomes would be slow.
 2. If a prophage is seperated into two or more contigs, the predicted prophage size might be smaller than the true size.
-3. If you have gerenated an SAM file using samtools, our script can be equally used to predict propahges on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
+3. If you have gerenated a SAM file using samtools, our script can be equally used to predict propahges on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
 
 Using `generate_DNA.sh` for generating simulated genomes resulted from prophage excision
 ------
@@ -105,6 +105,8 @@ Install `seqkit` first
 ```Bash
 conda install -c bioconda seqkit
 ```
+Download `generate_DNA.sh` and `random_DNA.py`
+
 Run script (default: simulating 20 genomes and one prophage in each genome)
 ```Bash
 bash generate_DNA.sh
