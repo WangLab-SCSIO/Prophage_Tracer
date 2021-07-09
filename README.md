@@ -107,13 +107,13 @@ conda install -c bioconda seqkit
 ```
 Download ``generate_DNA.sh`` and ``random_DNA.py``
 
-Run script (default: simulating 20 genomes and one prophage in each genome)
+Run script (default: simulating 20 genomes; one prophage in each genome)
 ```Bash
 bash generate_DNA.sh
 ```
 Copyright
 ------
-Kaihao Tang, khtang@scsio.ac.cn 
-Xiaoxue Wang, xxwang@scsio.ac.cn 
-Marine Biofilm Lab 
+Kaihao Tang, khtang@scsio.ac.cn;
+Xiaoxue Wang, xxwang@scsio.ac.cn;
+Marine Biofilm Lab;
 SCSIO, Chinese Academy of Sciences
