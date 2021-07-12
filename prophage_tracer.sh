@@ -792,9 +792,9 @@ awk ' BEGIN {FS="\t";OFS="\t";i=1;print "prophage_candidate","contig","attL_star
 
 if [ -f "$prefix.SR_evidence.list1" ]
 then
-awk 'BEGIN {FS="\t";OFS="\t"} NR==FNR {a[$1]=$0} NR>FNR {if ($9 in a) print $1} ' $prefix.SR_evidence.list1 $prefix.sr.temp.3 > $prefix.SR_evidence.list2
+awk 'BEGIN {FS="\t";OFS="\t"} NR==FNR {a[$1]=$0} NR>FNR {if ($9 in a) print $1} ' $prefix.SR_evidence.list1 $prefix.sr.temp.3 > $prefix.SR_evidence.list
 
-awk '!a[$2"_"$3"_"$4"_"$5"_"$6"_"$7"_"$8]++' $prefix.sr.temp.1 | awk '!a[$1]++'| awk 'BEGIN {FS="\t";OFS="\t"} NR==FNR {a[$1]=$0} NR>FNR {if ($1"_"$2 in a) print $0} ' $prefix.SR_evidence.list2 - | awk '{printf ">"$1"_"$2"\n"$10"\n"}' > $prefix.SR.reads.fasta
+awk '!a[$2"_"$3"_"$4"_"$5"_"$6"_"$7"_"$8]++' $prefix.sr.temp.1 | awk '!a[$1]++'| awk 'BEGIN {FS="\t";OFS="\t"} NR==FNR {a[$1]=$0} NR>FNR {if ($1"_"$2 in a) print $0} ' $prefix.SR_evidence.list - | awk '{printf ">"$1"_"$2"\n"$10"\n"}' > $prefix.SR.reads.fasta
 
 blastn -query $prefix.SR.reads.fasta -db $prefix.nuclDB -out $prefix.SR.blastn.result -evalue 1e-3 -outfmt 1 -word_size 11
 
@@ -802,7 +802,13 @@ fi
 
 #Clean up
 
-rm $prefix.drp.temp.left $prefix.SR_evidence.list1
+if [ -f "$prefix.SR_evidence.list1" ]
+then 
+rm $prefix.SR_evidence.list1
+fi
+
+rm contiglength.file $prefix.sr.temp.1 $prefix.reads.fasta makeblastdb.log blastn.log $prefix.sr.temp.2 $prefix.sr.temp.3 $prefix.sr.temp.out $prefix.drp.temp.1 $prefix.sr-drp.temp.out $prefix.drp.temp.2 $prefix.drp.temp.left $prefix.drp.temp.out $prefix.temp.out $prefix.nuclDB.*
+
 
 
 if [ $? -eq 0 ]
