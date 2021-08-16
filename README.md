@@ -115,7 +115,8 @@ bash generate_DNA.sh
 ```
 
 
-#### Coming updates
+Coming updates
+------
 1. Addding a parameter of `blastn` to set whether mismatch were allowed in the *att* sites (-penalty).
 2. To make the script to be able to analyse single read sequencing data.
 
