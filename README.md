@@ -112,10 +112,13 @@ Download ``generate_DNA.sh`` and ``random_DNA.py``
 Run script (default: simulating 20 genomes; one prophage in each genome)
 ```Bash
 bash generate_DNA.sh
+```
+
+
 #### Coming updates
 1. Addding a parameter of `blastn` to set whether mismatch were allowed in the *att* sites (-penalty).
 2. To make the script to be able to analyse single read sequencing data.
-```
+
 Copyright
 ------
 Kaihao Tang, khtang@scsio.ac.cn;
