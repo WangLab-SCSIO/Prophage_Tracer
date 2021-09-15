@@ -2,7 +2,9 @@ Prophage Tracer
 ========
 
 Prophage Tracer: Precisely tracing prophages in prokaryotic genomes using overlapping split-read alignment.
-Based on our analysis, in order to detect prophages with low excision rate, 100–1000× sequencing depth for a genome is recommended. At this range of sequencing depth, Prophage Tracer can detect the hidden prophages with excision rates (attB/gyrB) > $10^-3$ and/or replication (attP/gyrB) > $10^-3$ in host genomes.
+Based on our analysis, in order to detect prophages with low excision rate, 100–1000× sequencing depth for a genome is recommended. At this range of sequencing depth, Prophage Tracer can detect the hidden prophages with excision rates (attB/gyrB) > $10^-3$ and/or replication (attP/gyrB) > $10^-3$ in host genomes. 
+
+
 
 Requirement
 ------
@@ -16,8 +18,8 @@ Requirement
 5. [samtools 1.10](http://www.htslib.org/)
 
 #### Other softwares may be useful for data pre-processing steps
-1. [Shovill 1.1.0](https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own seperate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessarily significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
-2. [Trimmomatic 0.39](https://github.com/usadellab/Trimmomatic) for removeing low-quality regions and adapters in reads.
+1. [Shovill 1.1.0](https://github.com/tseemann/shovill) for assembling genomes. It is useful for detecting prophages assembled into their own separate contigs in contig-level genomes. In this case, the average sequencing depth of prophage-derived contigs is usually but not necessarily significantly higher than other contigs. The depth is written into the name of each contig in the output of Shovill.
+2. [Trimmomatic 0.39](https://github.com/usadellab/Trimmomatic) for removing low-quality regions and adapters in reads.
 
 Installation
 ------
@@ -29,7 +31,7 @@ Installation
 wget -c https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh
 bash Miniconda2-latest-Linux-x86_64.sh
 ```
-#### Chaing your envionment variables temporarily to use conda
+#### Changing your environment variables temporarily to use conda
 ```Bash
 export PATH=~/miniconda2/bin:$PATH
 ```
@@ -91,15 +93,15 @@ options:
 
 #### Explanation
 1. If a single contig was given in the `contig` column, it means an intact predicted prophage is in this contig.
-2. "::" indicates a predicted prophage is seperated into two or more contigs. "=" indicates that the 5' end or 3' end of a contig contains a part of a prophage. "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
+2. "::" indicates a predicted prophage is separated into two or more contigs. "=" indicates that the 5' end or 3' end of a contig contains a part of a prophage. "=contig00003" indicates the 5' end of contig00003 while "contig00003=" indicates the 3' end of contig00003.
 3. "SR_evidence_attB/attP" indicate split read counts support *attB* or *attP* of the predicted prophage. "DRP_evidence_attB/attP" indicate discordant read pair counts support *attB* or *attP* of the predicted prophage.
-4. Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is seperated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014). Prophage Phm3 (candidate_3)
+4. Prophage Phm2 (candidate_2) locates on contig00001 (1064123-1100178) with *attL* (1064123-1064145) and *attR* (1100156-1100178). Prophage Phm1 (candidate_1) is separated into two or more contigs and consists at least 3' end of contig00007 (*att* site: 209162-209236 on contig00007) and 5' end of contig00014 (*att* site: 2365-2439 on contig00014). Prophage Phm3 (candidate_3)
 is seperated into two or more contigs and consist at least 5' end of contig00003 (*att* site: 1700-1764 on contig00003) and 5' end of contig00014 (*att* site: 46895-46959 on contig00014).
 
 #### Notes
 1. `prophage_tracer.sh` is used for chromosome-level genomes. `prophage_tracer_WGS.sh` can be used for chromosome-level and contig-level genomes. However, using prophage_tracer_WGS.sh for analysis of chromosome-level  genomes would be slow.
-2. If a prophage is seperated into two or more contigs, the predicted prophage size might be smaller than the true size.
-3. If you have gerenated a SAM file using samtools, our script can be equally used to predict propahges on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
+2. If a prophage is separated into two or more contigs, the predicted prophage size might be smaller than the true size.
+3. If you have generated a SAM file using samtools, our script can be equally used to predict prophages on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
 
 Using `generate_DNA.sh` for generating simulated genomes resulted from prophage excision
 ------
@@ -118,8 +120,8 @@ bash generate_DNA.sh
 
 Coming updates
 ------
-1. Addding a parameter of `blastn` to set whether mismatch were allowed in the *att* sites (-penalty).
-2. To make the script to be able to analyse single read sequencing data.
+1. Adding a parameter of `blastn` to set whether mismatch were allowed in the *att* sites (-penalty).
+2. To make the script to be able to analyze single read sequencing data.
 
 Copyright
 ------
