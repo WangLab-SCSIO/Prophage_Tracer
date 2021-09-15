@@ -80,13 +80,14 @@ options:
 ```
 
 #### Typical output
-*Find result in `strain1.prophage.out`
+* Find result in `strain1.prophage.out`
 |prophage_candidate|contig|attL_start|attL_end|attR_start|attR_end|prophage_size|SR_evidence_attB|SR_evidence_attP|DRP_evidence_attB|DRP_evidence_attP|
 |----------|-------------------------|----|----|----|----|----|----|----|----|----|
 |candidate_1|contig00007=::=contig00014|209162|209236|2365|2439|16770|0|4|1|2
 |candidate_2|contig00001|1064123|1064145|1100156|1100178|36033|0|1|0|0
 |candidate_3|=contig00003::=contig00004|1700|1764|46895|46959|48658|2|28|2|24
-*Find 
+
+* Find 
 
 #### Explanation
 1. If a single contig was given in the `contig` column, it means an intact predicted prophage is in this contig.
