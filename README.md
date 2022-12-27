@@ -129,4 +129,4 @@ Kaihao Tang, khtang@scsio.ac.cn;
 Xiaoxue Wang, xxwang@scsio.ac.cn;
 Marine Biofilm Lab;
 SCSIO, Chinese Academy of Sciences
-![](https://github.com/WangLab-SCSIO/Prophage_Tracer?user=WangLab-SCSIOf&repo=Prophage_Tracer&countColor=%237B1E7A)
+![](https://api.visitorbadge.io/api/VisitorHit?user=WangLab-SCSIOf&repo=Prophage_Tracer&countColor=%237B1E7A)
