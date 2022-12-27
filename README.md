@@ -130,3 +130,4 @@ Xiaoxue Wang, xxwang@scsio.ac.cn;
 Marine Biofilm Lab;
 SCSIO, Chinese Academy of Sciences
 ![](https://api.visitorbadge.io/api/VisitorHit?user=WangLab-SCSIOf&repo=Prophage_Tracer&countColor=%237B1E7A)
+![Visitor Count](https://profile-counter.glitch.me/WangLab-SCSIO/count.svg)
