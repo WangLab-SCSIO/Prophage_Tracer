@@ -105,6 +105,7 @@ is seperated into two or more contigs and consist at least 5' end of contig00003
 
 Using `generate_DNA.sh` for generating simulated genomes resulted from prophage excision
 ------
+The purpose of generate_DNA.sh is to simulate DNA fasta files. Not necessary for using Prophage tracer.
 
 Install `seqkit` first
 ```Bash
