@@ -3,15 +3,15 @@
 set -eo pipefail
 
 ##########################################################
-# Prophage Tracer V1.0.0
+# Prophage Tracer V1.0.2
 #########################################################
 
 ## usage
 usage() {
     echo "
-Prophage Tracer V1.0.1 07/05/2021
+Prophage Tracer V1.0.2 07/05/2021
 usage:   bash prophage_tracer.sh [options] -m <in.sam> -r <in.fasta> -p <prefix>
-requirement：locally installed BLAST+ software
+requirement: locally installed BLAST+ software
 
 options:
      -m  FILE    a full SAM file (required)
@@ -21,8 +21,8 @@ options:
      -n  INT     minimal size of prophage (default: 5000)
      -a  INT     minimal length of attchment site (default: 10)
      -t  INT     number of threads used for BlastN (default: 1)
-	 -s  INT     minimal event of split reads required for supporting a prophage candidate (default: 1)
-	 -d  INT     minimal event of discordant read pairs required for supporting a prophage candidate (default: 1)
+  	 -s  INT     minimal event of split reads required for supporting a prophage candidate (default: 1)
+  	 -d  INT     minimal event of discordant read pairs required for supporting a prophage candidate (default: 1)
 "
 }
 
@@ -76,10 +76,10 @@ cat $fasta | awk '$0 ~ ">" {print c; c=0;split($0,a,"[> ]"); printf a[2] "\t"; }
 
 
 #Get read length and insert size
-read_length=`head -n 10000 $sam_file | gawk 'BEGIN { max=0 } { if (length($10)>max) max=length($10) } END { print max }'`
-
-insert_size=`head -n 10000 $sam_file | awk '($2 ~ /163|83|99|147/ )' | cut -f9 | awk '{print sqrt($0^2)}' | awk '$0<10000'| awk '{ sum += $0;i++ } END { print int(sum/i) }'`
-
+#read_length=`head -n 10000 $sam_file | gawk 'BEGIN { max=0 } { if (length($10)>max) max=length($10) } END { print max }'`
+read_length=150
+#insert_size=`head -n 10000 $sam_file | awk '($2 ~ /163|83|99|147/ )' | cut -f9 | awk '{print sqrt($0^2)}' | awk '$0<10000'| awk '{ sum += $0;i++ } END { print int(sum/i) }'`
+insert_size=500
 #Step 1: Extracting split reads
 echo -e "Step 1: Extracting split reads"
 
@@ -95,8 +95,7 @@ makeblastdb -in $fasta -dbtype nucl -out $prefix.nuclDB > makeblastdb.log 2>&1
 
 blastn -query $prefix.reads.fasta -db $prefix.nuclDB -out $prefix.blastn.result -evalue 1e-3 -outfmt 6 -word_size 11 -num_threads $threads > blastn.log 2>&1 
 
-#Manipulate blastn result ######################################################################################下面筛选到2条后再加一个按照reads起始位点排序的命令
-
+#Manipulate blastn result ######################################################################################下面筛选到2条后再加一个按照reads起始位点排序的命�?
 awk 'BEGIN{FS="\t";OFS="\t"} {if ($3 > 90) a[$1,++b[$1]]=$0}END{for(i in b) if (b[i] == 2) print a[i,1]"\n"a[i,2]}' $prefix.blastn.result| awk '{if($0!="") print}' |sort -k1,1 -k7n,7 > $prefix.sr.temp.2
 
 #Classify reads containing attB or attP
@@ -813,7 +812,7 @@ rm contiglength.file $prefix.sr.temp.1 $prefix.reads.fasta makeblastdb.log blast
 
 if [ $? -eq 0 ]
 then
-    echo "Successfully running prophage_GPS.sh"
+    echo "Successfully running prophage_tracer.sh"
 	echo -e "checking predicted prophage in $prefix.prophage.out\n\n"
 else
     echo "!!!Unsuccessfully running prophage_GPS.sh!!!" 

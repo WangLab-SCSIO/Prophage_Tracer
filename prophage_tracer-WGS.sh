@@ -3,13 +3,13 @@
 set -eo pipefail
 
 ##########################################################
-# Prophage Tracer V1.0.0
+# Prophage Tracer V1.0.2
 #########################################################
 
 ## usage
 usage() {
     echo "
-Prophage Tracer V1.0.0 07/05/2021
+Prophage Tracer V1.0.2 07/05/2021
 usage:   bash prophage_tracer-WGS.sh [options] -m <in.sam> -r <in.fasta> -p <prefix>
 requirement：locally installed BLAST+ software
 
@@ -76,9 +76,10 @@ cat $fasta | awk '$0 ~ ">" {print c; c=0;split($0,a,"[> ]"); printf a[2] "\t"; }
 
 
 #Get read length and insert size
-read_length=`head -n 10000 $sam_file | gawk 'BEGIN { max=0 } { if (length($10)>max) max=length($10) } END { print max }'`
-
-insert_size=`head -n 10000 $sam_file | awk '($2 ~ /163|83|99|147/ )' | cut -f9 | awk '{print sqrt($0^2)}' | awk '$0<10000'| awk '{ sum += $0;i++ } END { print int(sum/i) }'`
+#read_length=`head -n 10000 $sam_file | gawk 'BEGIN { max=0 } { if (length($10)>max) max=length($10) } END { print max }'`
+read_length=150
+#insert_size=`head -n 10000 $sam_file | awk '($2 ~ /163|83|99|147/ )' | cut -f9 | awk '{print sqrt($0^2)}' | awk '$0<10000'| awk '{ sum += $0;i++ } END { print int(sum/i) }'`
+insert_size=500
 
 #Step 1: Extracting split reads
 echo -e "Step 1: Extracting split reads"

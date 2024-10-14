@@ -103,6 +103,23 @@ is seperated into two or more contigs and consist at least 5' end of contig00003
 2. If a prophage is separated into two or more contigs, the predicted prophage size might be smaller than the true size.
 3. If you have generated a SAM file using samtools, our script can be equally used to predict prophages on Windows 10 with Git Bash and blastn (`ncbi-blast-2.6.0+-win64.exe`) installed. For installing Git Bash and blastn in Windows 10, please refer to https://git-scm.com/downloads and https://ftp.ncbi.nlm.nih.gov/blast/executables/blast+/2.6.0/.
 
+#### Using testing data
+genome file: GCF_009846525.1_ASM984652v1_genomic.fna
+reads files: test_R1.fq.gz and test_R2.fq.gz
+
+#Mapping reads to the genome
+```Bash
+bwa index GCF_009846525.1_ASM984652v1_genomic.fna -p test-strain
+bwa mem test-strain test_small_R1.fq.gz test_small_R2.fq.gz >SRR13189228-test-strain.sam
+```
+#Run prophage_tracer
+```Bash
+bash prophage_tracer.sh -m SRR13189228-test-strain.sam -r GCF_009846525.1_ASM984652v1_genomic.fna -p test-strain
+
+# Output of test 
+prophage_candidate      contig  attL_start      attL_end        attR_start      attR_end        prophage_size   SR_evidence_attB        SR_evidence_attP  DRP_evidence_attB        DRP_evidence_attP
+candidate_1     NZ_CP024621.1   2090511 2090576 2139945 2140010 49434   0       1       0       1
+
 Using `generate_DNA.sh` for generating simulated genomes resulted from prophage excision
 ------
 
