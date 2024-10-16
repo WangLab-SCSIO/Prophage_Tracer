@@ -3,13 +3,13 @@
 set -eo pipefail
 
 ##########################################################
-# Prophage Tracer V1.0.2
+# Prophage Tracer V1.0.3
 #########################################################
 
 ## usage
 usage() {
     echo "
-Prophage Tracer V1.0.2 07/05/2021
+Prophage Tracer V1.0.3 Oct 16, 2024
 usage:   bash prophage_tracer.sh [options] -m <in.sam> -r <in.fasta> -p <prefix>
 requirement: locally installed BLAST+ software
 
@@ -91,11 +91,11 @@ awk '!a[$2"_"$3"_"$4"_"$5"_"$6"_"$7"_"$8]++' $prefix.sr.temp.1 | awk '($1 !~ /^@
 
 #Blastn searching reads against the reference genome.
 
-makeblastdb -in $fasta -dbtype nucl -out $prefix.nuclDB > makeblastdb.log 2>&1 
+makeblastdb -in $fasta -dbtype nucl -out $prefix.nuclDB > makeblastdb.log 2>&1 ||true
 
 blastn -query $prefix.reads.fasta -db $prefix.nuclDB -out $prefix.blastn.result -evalue 1e-3 -outfmt 6 -word_size 11 -num_threads $threads > blastn.log 2>&1 
 
-#Manipulate blastn result ######################################################################################下面筛选到2条后再加一个按照reads起始位点排序的命�?
+#Manipulate blastn result ######################################################################################
 awk 'BEGIN{FS="\t";OFS="\t"} {if ($3 > 90) a[$1,++b[$1]]=$0}END{for(i in b) if (b[i] == 2) print a[i,1]"\n"a[i,2]}' $prefix.blastn.result| awk '{if($0!="") print}' |sort -k1,1 -k7n,7 > $prefix.sr.temp.2
 
 #Classify reads containing attB or attP

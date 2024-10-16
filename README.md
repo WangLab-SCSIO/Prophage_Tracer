@@ -3,6 +3,7 @@ Prophage Tracer
 
 Prophage Tracer: Precisely tracing prophages in prokaryotic genomes using overlapping split-read alignment.
 Based on our analysis, in order to detect prophages with low excision rate, 100–1000× sequencing depth for a genome is recommended. At this range of sequencing depth, Prophage Tracer can detect the hidden prophages with excision rates (attB/gyrB) > $10^-3$ and/or replication (attP/gyrB) > $10^-3$ in host genomes. 
+#### It should be noted that some users reported that blast+ 2.16.0 on Ubuntu may generate error and exit the shell script when using makeblastdb. However, this bulit DB is ok for downstream command. Therefore, I have updated the shell script to ignore this error message and continue with the following command. I also suggest to install blast+ 2.6.0 as mentioned in "System and software requirements".
 
 
 
@@ -110,11 +111,11 @@ reads files: test_R1.fq.gz and test_R2.fq.gz
 1.Mapping reads to the genome
 ```Bash
 bwa index GCF_009846525.1_ASM984652v1_genomic.fna -p test-strain
-bwa mem test-strain test_small_R1.fq.gz test_small_R2.fq.gz >SRR13189228-test-strain.sam
+bwa mem test-strain test_small_R1.fq.gz test_small_R2.fq.gz test-strain.sam
 ```
 2.Run prophage_tracer
 ```Bash
-bash prophage_tracer.sh -m SRR13189228-test-strain.sam -r GCF_009846525.1_ASM984652v1_genomic.fna -p test-strain
+bash prophage_tracer.sh -m test-strain.sam -r GCF_009846525.1_ASM984652v1_genomic.fna -p test-strain
 
 3.Output of test 
 prophage_candidate      contig  attL_start      attL_end        attR_start      attR_end        prophage_size   SR_evidence_attB        SR_evidence_attP  DRP_evidence_attB        DRP_evidence_attP
@@ -139,6 +140,11 @@ Coming updates
 ------
 1. Adding a parameter of `blastn` to set whether mismatch were allowed in the *att* sites (-penalty).
 2. To make the script to be able to analyze single read sequencing data.
+
+Release notes
+------
+Version 1.0.3: ignore the error message caused by makeblastdb and continue with the following command
+
 
 Copyright
 ------
